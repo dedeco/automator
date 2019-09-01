@@ -80,3 +80,6 @@ venv.bak/
 /.blackbox/secring.gpg
 /instance/flask-prd.cfg
 /instance/flask-dev.cfg
+
+#Custom
+/web/tmp/*

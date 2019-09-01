@@ -2,6 +2,8 @@ import requests
 
 from utils import generate_links
 
+from app import app
+
 def send_email_success(links, cfg):
     """Send an email using MailGun"""
 
@@ -11,8 +13,8 @@ def send_email_success(links, cfg):
         + ' '.join(urls)
 
     r = requests.post(
-        MAILGUN_URL,
-        auth=("api", MAILGUN_KEY),
+        app.config['MAILGUN_URL'],
+        auth=("api", app.config['MAILGUN_KEY']),
         data={
             "subject": "File processed!",
             "from": "no-answer@mg.sousaaraujoti.com.br",
