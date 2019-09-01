@@ -1,0 +1,65 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="content">
+            <div class="pure-g">
+
+                <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}        
+                    {% for category, message in messages %}
+                        <div class="{{ category }}" >
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <form  class="pure-form pure-form-stacked" action="" method="post" enctype="multipart/form-data" id="form_r" name="form_r">
+                    <fieldset>
+                        <h2> Export receipts for FINANCE</h2>
+                        {% for field in form %}
+                            <label for="{{field.id}}">{{field.label}}</label>
+                            {{field(class="form-control-file")}}
+                            {% if field.errors %}<span class="error">{{';'.join(field.errors)}}</span>{% endif %} </p>
+                        {% endfor %}
+                        
+                        <div class="pure-controls">
+                            <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                        </div>
+                    </fieldset>
+                </form>
+                </div>
+
+                <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+
+                    <h4>What I do?</h4>
+
+                    <p>
+                        I can read a column from an excel file whith links, extract images (jpg, jpeg, png, gif) 
+                        or pdf from this links in order to generate a unique pdf file and zip file (with all files). 
+                    </p>
+
+                    <h4>Follow this steps:</h4>
+                    <ul>
+                        <li>Fill this form (on left)</li>
+                        <li>Wait a while until receive in email</li>
+                        <li>Download the file (by link in email)</li>
+
+                    </ul>
+
+                    <h4>More Information</h4>
+                    <p>
+                        Some job will extract all images reading this excel file. After downloading all images or pdf,
+                        another job will join all files in a unique pdf file (multiples pages) and zip all files.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

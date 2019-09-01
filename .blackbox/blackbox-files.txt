@@ -1,0 +1,2 @@
+instance/flask-dev.cfg
+instance/flask-prd.cfg
