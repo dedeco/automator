@@ -4,7 +4,7 @@ from utils import generate_links
 
 from app import app
 
-def send_email_success(links, cfg):
+def send_email_success(email, report_id, links, cfg):
     """Send an email using MailGun"""
 
     urls = generate_links(links, cfg)
@@ -16,9 +16,9 @@ def send_email_success(links, cfg):
         app.config['MAILGUN_URL'],
         auth=("api", app.config['MAILGUN_KEY']),
         data={
-            "subject": "File processed!",
+            "subject": "File processed! Report " + str(report_id),
             "from": "no-answer@mg.sousaaraujoti.com.br",
-            "to": "dedecu@hotmail.com",
+            "to": email,
             "text": text,
             "html": text,
         },

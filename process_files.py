@@ -24,7 +24,7 @@ def get_reports_from_DB(database_uri):
 
     Base = declarative_base()
 
-    reports = session.query(ReportToExport).all()
+    reports = session.query(ReportToExport).filter_by(status=0).all()
     return session, reports
 
 def process():
@@ -67,7 +67,7 @@ def process():
 
             print('Sending email')
 
-            send_email_success(urls, app.config)
+            send_email_success(r.email, r.report_id, urls, app.config)
 
         except FileNotFoundError:
             r.status = 2
