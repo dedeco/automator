@@ -19,7 +19,7 @@ def index():
     if request.method == 'POST':
         f = UploadForm(request.values)
         ff = request.files.get('file', None)
-        ff.filename = str(uuid.uuid4()) + "." + os.path.splitext(ff.filename)[1]
+        ff.filename = str(uuid.uuid4()) + os.path.splitext(ff.filename)[1]
         if ff:
             try:
                 filename = reports_upload.save(ff)

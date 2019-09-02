@@ -8,7 +8,7 @@ import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 from .uploadsets import reports_upload
-from .routes import page_not_found
+from .routes import page_not_found, internal_server_error
 
 db = SQLAlchemy()
 
@@ -29,7 +29,7 @@ def initialize_extensions(app):
          resources={r"/automator/excel*": {"origins": app.config['INDEX_URL']}}
          )
     sentry_sdk.init(
-        dsn="https://dae2a6963cae40958795f7e54601b488@sentry.io/1547384",
+        dsn=app.config['SENTRY_URL'],
         integrations=[FlaskIntegration()]
     )
 
@@ -40,3 +40,4 @@ def register_blueprints(app):
 
 def register_special_routers(app):
     app.register_error_handler(404, page_not_found)
+    app.register_error_handler(500, internal_server_error)
