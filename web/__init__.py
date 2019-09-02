@@ -28,10 +28,10 @@ def initialize_extensions(app):
          supports_credentials=True,
          resources={r"/automator/excel*": {"origins": app.config['INDEX_URL']}}
          )
-    sentry_sdk.init(
-        dsn=app.config['SENTRY_URL'],
-        integrations=[FlaskIntegration()]
-    )
+    #sentry_sdk.init(
+    #    dsn=app.config['SENTRY_URL'],
+    #    integrations=[FlaskIntegration()]
+    #)
 
 from web.receipt import receipt_blueprint
 
