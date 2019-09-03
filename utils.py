@@ -2,11 +2,14 @@ import os
 import uuid
 import urllib.request
 
-def download_file(file, directory):
-    urllib.request.urlretrieve(file, directory + os.path.basename(file))
+def download_file(i, file, directory):
+    new_file_name = '{0:04}'.format(i) 
+    filename, file_extension = os.path.splitext(file)
+    urllib.request.urlretrieve(file, directory + (new_file_name + file_extension))
 
 def zip_directories(path, ziph):
     for root, dirs, files in os.walk(path):
+        files.sort()
         for file in files:
             ziph.write(os.path.join(root, file))
 
@@ -37,9 +40,11 @@ def convert_files_to_pdf(uuid_name, path, cfg):
         from_ = cfg['TMP_DOWNLOADS_DEST'] + uuid_name + '/'
         to =  cfg['TMP_UNMERGED_DEST'] + uuid_name + '/'
 
+        files.sort()
+
         for i, file in enumerate(files):
             pdf = FPDF('P', 'mm', 'A4')
-            pdf_name = "partial_" + '{0:04}'.format(i) + ".pdf"
+            pdf_name = '{0:04}'.format(i) + ".pdf"
             filename, file_extension = os.path.splitext(file)
             if file_extension in ['.jpg','.jpeg','.png','.gif']:
                 cover = Image.open(os.path.join(root, file))
@@ -68,6 +73,7 @@ def merge_pdf(uuid_name, pdf_name, cfg):
     to = cfg['TMP_UNMERGED_DEST'] + uuid_name + '/'
     writer = PdfWriter()
     for root, dirs, files in os.walk(to):
+        files.sort()
         for inpfn in files:
             writer.addpages(PdfReader(os.path.join(to, inpfn)).pages)
         writer.write(pdf_name)

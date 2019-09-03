@@ -43,8 +43,9 @@ def process():
             sheet = wb.sheet_by_index(0) 
             arrayofvalues = sheet.col_values(0)
 
-            for file in arrayofvalues[1:]:
-                download_file(file, directory)
+            
+            for i, file in enumerate(arrayofvalues[1:]):
+                download_file(i, file, directory)
 
             zip_name = "report_" + str(r.report_id) + "_" + uuid_name + ".zip"
 
