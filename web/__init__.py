@@ -26,7 +26,7 @@ def initialize_extensions(app):
     migrate = Migrate(app, db)
     CORS(app,
          supports_credentials=True,
-         resources={r"/automator/excel*": {"origins": app.config['INDEX_URL']}}
+         resources={r"*": {"origins": app.config['INDEX_URL']}}
          )
     sentry_sdk.init(
         dsn=app.config['SENTRY_URL'],
@@ -36,7 +36,7 @@ def initialize_extensions(app):
 from web.receipt import receipt_blueprint
 
 def register_blueprints(app):
-    app.register_blueprint(receipt_blueprint, url_prefix='/automator/excel')
+    app.register_blueprint(receipt_blueprint, url_prefix='/')
 
 def register_special_routers(app):
     app.register_error_handler(404, page_not_found)
