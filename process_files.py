@@ -45,7 +45,7 @@ def process():
 
             
             for i, file in enumerate(arrayofvalues[1:]):
-                download_file(i, file, directory)
+                download_file(i, file, directory, cfg=app.config)
 
             zip_name = "report_" + str(r.report_id) + "_" + uuid_name + ".zip"
 

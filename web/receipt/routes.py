@@ -28,14 +28,13 @@ def index():
 
                 r = ReportToExport(f.report_id.data
                             ,f.column_number.data
-                            ,f.export_to.data
                             ,f.email.data
                             ,filename)
 
                 db.session.add(r)
                 db.session.commit()
 
-                flash(u"At the end of processing yout will recieve the file by" \
+                flash(u"At the end of processing yout will recieve the file by " \
                     "email! ;-)", u"success")
 
                 f = UploadForm()

@@ -14,10 +14,10 @@ class ReportToExport(db.Model):
     file = db.Column(db.String(255))
     status = db.Column(db.Integer)
 
-    def __init__(self, report_id, column_number, export_to, email, file):
+    def __init__(self, report_id, column_number, email, file):
         self.report_id = report_id
         self.column_number = column_number
-        self.export_to = export_to
+        self.export_to = 0
         self.email = email
         self.file = file
         self.status = 0
