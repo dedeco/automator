@@ -34,7 +34,7 @@ def index():
                 db.session.add(r)
                 db.session.commit()
 
-                flash(u"At the end of processing yout will recieve the file by " \
+                flash(u"At the end of processing you will recieve the file by " \
                     "email! ;-)", u"success")
 
                 f = UploadForm()
