@@ -102,6 +102,8 @@ def do_screen_capturing(url, screen_path, width, height, cfg):
         driver.set_window_size(width, height)
     driver.get(url)
     driver.save_screenshot(screen_path)
+    driver.close()
+    driver.quit()
 
 def get_screen_shot(url, path_file, cfg):
     width =  1024
