@@ -7,7 +7,7 @@ def download_file(i, file, directory, cfg):
     filename, file_extension = os.path.splitext(file)
     path_file = directory + new_file_name 
     local_filename, headers = urllib.request.urlretrieve(file, path_file + file_extension)
-    if 'web/tmp/downloads' in local_filename:
+    if 'verifyReceipt.php?' in file:
         if os.path.isfile(local_filename):
             os.remove(local_filename)
         screen_path = get_screen_shot(file, path_file + '.png', cfg)
