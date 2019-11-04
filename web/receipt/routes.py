@@ -2,7 +2,7 @@ import uuid
 import os
 
 from flask import Flask, render_template, current_app, request, flash \
-                    , send_file, send_from_directory, abort
+    , send_file, send_from_directory, abort
 
 from flask_uploads import UploadNotAllowed
 
@@ -13,6 +13,7 @@ from .models import ReportToExport
 
 from web import db
 from web.uploadsets import reports_upload
+
 
 @receipt_blueprint.route('/', methods=('GET', 'POST'))
 def index():
@@ -26,16 +27,16 @@ def index():
 
                 fp = reports_upload.path(filename)
 
-                r = ReportToExport(f.report_id.data
-                            ,f.column_number.data
-                            ,f.email.data
-                            ,filename)
+                r = ReportToExport(f.report_name.data
+                                   , f.export_type.data
+                                   , f.email.data
+                                   , filename)
 
                 db.session.add(r)
                 db.session.commit()
 
-                flash(u"At the end of processing you will recieve the file by " \
-                    "email! ;-)", u"success")
+                flash(u"At the end of processing you will recieve the file by " 
+                      "email! ;-)", u"success")
 
                 f = UploadForm()
 
@@ -46,9 +47,9 @@ def index():
     return render_template('receipt/index.html', form=f)
 
 
-@receipt_blueprint.route('/download/<path:filename>', methods=['GET','POST'])
+@receipt_blueprint.route('/download/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
     UPLOAD_DIRECTORY = "./tmp/uploads/"
     return send_from_directory(directory=UPLOAD_DIRECTORY
-                            , filename=filename
-                            , as_attachment=True)
+                               , filename=filename
+                               , as_attachment=True)
