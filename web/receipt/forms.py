@@ -4,8 +4,7 @@ from wtforms import validators
 from wtforms.fields.html5 import EmailField
 
 type_ = [
-    (u'1', u'Person+Category+Link+Value'),
-    (u'2', u'Link')
+    (u'1', u'Person+Category+Link+Value')
 ]
 
 
